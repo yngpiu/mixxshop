@@ -217,13 +217,15 @@
 
 
 
-                                                <c:forEach begin="0" end="${totalPage-1}" varStatus="loop">
-                                                    <li
-                                                        class="${(loop.index+1) eq currentPage ? 'page-item active' : 'page-item'}">
-                                                        <a class="page-link"
-                                                            href="/table/user?page=${loop.index+1}">${loop.index+1}</a>
-                                                    </li>
-                                                </c:forEach>
+                                                <c:if test="${totalPage > 0}">
+                                                    <c:forEach begin="0" end="${totalPage-1}" varStatus="loop">
+                                                        <li
+                                                            class="${(loop.index+1) eq currentPage ? 'page-item active' : 'page-item'}">
+                                                            <a class="page-link"
+                                                                href="/table/user?page=${loop.index+1}">${loop.index+1}</a>
+                                                        </li>
+                                                    </c:forEach>
+                                                </c:if>
 
 
 

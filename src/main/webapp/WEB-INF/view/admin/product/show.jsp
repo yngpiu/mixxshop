@@ -210,15 +210,17 @@
                                     </c:if>
 
 
-                                    <c:forEach begin="0" end="${totalPages-1}" varStatus="loop">
+                                    <c:if test="${totalPages > 0}">
+                                        <c:forEach begin="0" end="${totalPages-1}" varStatus="loop">
 
-                                        <li
-                                            class="${(loop.index+1) eq currentPages ? 'page-item active' : 'page-item'}">
-                                            <a class="page-link"
-                                                href="/adminProduct?page=${loop.index+1}">${loop.index+1}</a>
-                                        </li>
+                                            <li
+                                                class="${(loop.index+1) eq currentPages ? 'page-item active' : 'page-item'}">
+                                                <a class="page-link"
+                                                    href="/adminProduct?page=${loop.index+1}">${loop.index+1}</a>
+                                            </li>
 
-                                    </c:forEach>
+                                        </c:forEach>
+                                    </c:if>
 
                                     <!-- <li class="page-item"><a class="page-link" href="/adminProduct?page=2">2</a></li>
                                 <li class="page-item"><a class="page-link" href="/adminProduct?page=3">3</a></li> -->
