@@ -25,7 +25,7 @@ contentType="text/html;charset=UTF-8" language="java" %>
     ></script>
     <style>
       .delete-container {
-        max-width: 1000px;
+        max-width: 800px;
         margin: 0 auto;
       }
 
@@ -48,6 +48,12 @@ contentType="text/html;charset=UTF-8" language="java" %>
 
       .delete-card-body {
         padding: 30px;
+      }
+
+      .center-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
 
       .delete-warning {
@@ -128,18 +134,6 @@ contentType="text/html;charset=UTF-8" language="java" %>
         font-weight: 700;
         margin-bottom: 20px;
         color: #343a40;
-      }
-
-      .delete-img-container {
-        text-align: center;
-        margin-bottom: 30px;
-      }
-
-      .delete-img {
-        border-radius: 10px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
-        max-width: 100%;
-        height: auto;
       }
 
       @media (max-width: 768px) {
@@ -229,73 +223,61 @@ contentType="text/html;charset=UTF-8" language="java" %>
             </ol>
 
             <div class="delete-container">
-              <div class="row g-4">
-                <div class="col-lg-5">
-                  <div class="delete-img-container">
-                    <img
-                      src="/images/product/destroyOrder.jpg"
-                      class="delete-img"
-                      alt="Delete Order Confirmation"
-                    />
-                  </div>
+              <div class="delete-card">
+                <div class="delete-card-header">
+                  <i class="fas fa-exclamation-triangle me-2"></i> Xác nhận xóa
+                  đơn hàng
                 </div>
+                <div class="delete-card-body">
+                  <div class="center-icon">
+                    <i
+                      class="fas fa-exclamation-circle icon-warning d-block"
+                    ></i>
+                  </div>
+                  <h3 class="delete-title">
+                    Bạn chắc chắn muốn xóa đơn hàng này?
+                  </h3>
 
-                <div class="col-lg-7">
-                  <div class="delete-card">
-                    <div class="delete-card-header">
-                      <i class="fas fa-exclamation-triangle me-2"></i> Xác nhận
-                      xóa đơn hàng
-                    </div>
-                    <div class="delete-card-body">
-                      <i
-                        class="fas fa-exclamation-circle icon-warning d-block"
-                      ></i>
-                      <h3 class="delete-title">
-                        Bạn chắc chắn muốn xóa đơn hàng này?
-                      </h3>
+                  <div class="delete-warning">
+                    <strong>Lưu ý:</strong> Thao tác này không thể hoàn tác và
+                    tất cả thông tin liên quan đến đơn hàng sẽ bị xóa vĩnh viễn
+                    khỏi hệ thống.
+                  </div>
 
-                      <div class="delete-warning">
-                        <strong>Lưu ý:</strong> Thao tác này không thể hoàn tác
-                        và tất cả thông tin liên quan đến đơn hàng sẽ bị xóa
-                        vĩnh viễn khỏi hệ thống.
+                  <div class="order-info">
+                    <div class="row mb-3">
+                      <div class="col-md-6">
+                        <p class="info-label">Mã đơn hàng:</p>
+                        <p class="info-value">#${delO.id}</p>
                       </div>
-
-                      <div class="order-info">
-                        <div class="row mb-3">
-                          <div class="col-md-6">
-                            <p class="info-label">Mã đơn hàng:</p>
-                            <p class="info-value">#${delO.id}</p>
-                          </div>
-                          <div class="col-md-6">
-                            <p class="info-label">Khách hàng:</p>
-                            <p class="info-value">${delO.receiverName}</p>
-                          </div>
-                        </div>
+                      <div class="col-md-6">
+                        <p class="info-label">Khách hàng:</p>
+                        <p class="info-value">${delO.receiverName}</p>
                       </div>
-
-                      <form:form
-                        action="/admin/order/del/finish"
-                        method="post"
-                        modelAttribute="delOrder"
-                      >
-                        <form:input
-                          type="text"
-                          value="${delO.id}"
-                          path="id"
-                          style="display: none"
-                        />
-
-                        <div class="btn-actions">
-                          <a href="/adminOrder" class="btn-cancel">
-                            <i class="fas fa-times me-2"></i> Hủy bỏ
-                          </a>
-                          <button type="submit" class="btn-confirm">
-                            <i class="fas fa-trash-alt me-2"></i> Xác nhận xóa
-                          </button>
-                        </div>
-                      </form:form>
                     </div>
                   </div>
+
+                  <form:form
+                    action="/admin/order/del/finish"
+                    method="post"
+                    modelAttribute="delOrder"
+                  >
+                    <form:input
+                      type="text"
+                      value="${delO.id}"
+                      path="id"
+                      style="display: none"
+                    />
+
+                    <div class="btn-actions">
+                      <a href="/adminOrder" class="btn-cancel">
+                        <i class="fas fa-times me-2"></i> Hủy bỏ
+                      </a>
+                      <button type="submit" class="btn-confirm">
+                        <i class="fas fa-trash-alt me-2"></i> Xác nhận xóa
+                      </button>
+                    </div>
+                  </form:form>
                 </div>
               </div>
             </div>
