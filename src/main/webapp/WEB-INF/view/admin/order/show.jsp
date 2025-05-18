@@ -12,28 +12,151 @@
                     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
                     <meta name="description" content="" />
                     <meta name="author" content="" />
-                    <title>Dashboard - SB Admin</title>
-                    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css"
-                        rel="stylesheet" />
+                    <title>Quản lý đơn hàng - Laptop Shop</title>
+                    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
                     <link href="/css/styles.css" rel="stylesheet" />
-                    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
-                        crossorigin="anonymous"></script>
+                    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
                     <style>
-                        table {
-                            font-family: arial, sans-serif;
-                            border-collapse: collapse;
+                        .table-container {
+                            background-color: #fff;
+                            border-radius: 8px;
+                            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                            overflow: hidden;
+                            margin-bottom: 2rem;
+                        }
+                        
+                        .order-table {
                             width: 100%;
+                            border-collapse: collapse;
                         }
-
-                        td,
-                        th {
-                            border: 1px solid #dddddd;
+                        
+                        .order-table th {
+                            background-color: #f8f9fa;
+                            color: #495057;
+                            font-weight: 600;
+                            text-transform: uppercase;
+                            font-size: 0.85rem;
+                            padding: 15px;
                             text-align: left;
-                            padding: 8px;
+                            border-bottom: 2px solid #dee2e6;
                         }
-
-                        tr:nth-child(even) {
-                            background-color: #dddddd;
+                        
+                        .order-table td {
+                            padding: 15px;
+                            vertical-align: middle;
+                            border-bottom: 1px solid #e9ecef;
+                        }
+                        
+                        .order-table tr:hover {
+                            background-color: #f8f9fa;
+                        }
+                        
+                        .order-id {
+                            font-weight: 600;
+                            color: #495057;
+                        }
+                        
+                        .status-badge {
+                            padding: 6px 12px;
+                            border-radius: 50px;
+                            font-size: 0.8rem;
+                            font-weight: 600;
+                            display: inline-block;
+                            text-align: center;
+                        }
+                        
+                        .status-pending {
+                            background-color: #fff3cd;
+                            color: #856404;
+                        }
+                        
+                        .status-delivering {
+                            background-color: #cce5ff;
+                            color: #004085;
+                        }
+                        
+                        .status-finish {
+                            background-color: #d4edda;
+                            color: #155724;
+                        }
+                        
+                        .btn-action {
+                            padding: 5px 15px;
+                            border-radius: 4px;
+                            margin-right: 5px;
+                            border: none;
+                            color: white;
+                            text-decoration: none;
+                            display: inline-block;
+                            transition: all 0.3s;
+                        }
+                        
+                        .btn-view {
+                            background-color: #007bff;
+                        }
+                        
+                        .btn-edit {
+                            background-color: #6c757d;
+                        }
+                        
+                        .btn-delete {
+                            background-color: #dc3545;
+                        }
+                        
+                        .btn-action:hover {
+                            opacity: 0.85;
+                            color: white;
+                        }
+                        
+                        .page-header {
+                            background-color: #fff;
+                            border-radius: 8px;
+                            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+                            padding: 20px;
+                            margin-bottom: 20px;
+                        }
+                        
+                        .page-header h1 {
+                            color: #343a40;
+                            font-weight: 600;
+                            margin-bottom: 5px;
+                        }
+                        
+                        .order-count {
+                            font-weight: normal;
+                            color: #6c757d;
+                            font-size: 1rem;
+                        }
+                        
+                        /* Pagination styling */
+                        .pagination {
+                            margin-top: 20px;
+                        }
+                        
+                        .pagination .page-link {
+                            color: #343a40;
+                            border-radius: 4px;
+                            margin: 0 3px;
+                        }
+                        
+                        .pagination .page-item.active .page-link {
+                            background-color: #343a40;
+                            border-color: #343a40;
+                        }
+                        
+                        /* Mobile responsive */
+                        @media (max-width: 992px) {
+                            .btn-action {
+                                padding: 4px 10px;
+                                font-size: 0.85rem;
+                            }
+                        }
+                        
+                        @media (max-width: 768px) {
+                            .order-table {
+                                display: block;
+                                overflow-x: auto;
+                            }
                         }
                     </style>
                 </head>
@@ -46,12 +169,9 @@
                         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle"
                             href="#!"><i class="fas fa-bars"></i></button>
                         <!-- Navbar Search-->
-                        <div
-                            style="display: flex; justify-content: center; align-items: center; margin-top: 1.5%; margin-left: 33%;">
-                            <p style="color: aliceblue;">Hi, ${currentUserLogin}</p>
+                        <div class="d-flex align-items-center ms-auto me-3">
+                            <p class="text-light mb-0">Hi, ${currentUserLogin}</p>
                         </div>
-                        <!-- Navbar-->
-
                     </nav>
                     <div id="layoutSidenav">
                         <div id="layoutSidenav_nav">
@@ -72,72 +192,10 @@
                                             </div>
                                             Quản lý sản phẩm
                                         </a>
-                                        <a class="nav-link" href="/adminOrder" style="background-color: brown;">
+                                        <a class="nav-link active" href="/adminOrder">
                                             <div class="sb-nav-link-icon"><i class="fa-regular fa-newspaper"></i></div>
                                             Quản lý đơn hàng
                                         </a>
-                                        <!-- <div class="sb-sidenav-menu-heading">Interface</div>
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                            data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                            Layouts
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
-                            data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="layout-static.html">Static Navigation</a>
-                                <a class="nav-link" href="layout-sidenav-light.html">Light Sidenav</a>
-                            </nav>
-                        </div> -->
-                                        <!-- <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
-                            aria-expanded="false" aria-controls="collapsePages">
-                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                            Pages
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a> -->
-                                        <!-- <div class="collapse" id="collapsePages" aria-labelledby="headingTwo"
-                            data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                                    data-bs-target="#pagesCollapseAuth" aria-expanded="false"
-                                    aria-controls="pagesCollapseAuth">
-                                    Authentication
-                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                </a>
-                                <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne"
-                                    data-bs-parent="#sidenavAccordionPages">
-                                    <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link" href="login.html">Login</a>
-                                        <a class="nav-link" href="register.html">Register</a>
-                                        <a class="nav-link" href="password.html">Forgot Password</a>
-                                    </nav>
-                                </div>
-                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                                    data-bs-target="#pagesCollapseError" aria-expanded="false"
-                                    aria-controls="pagesCollapseError">
-                                    Error
-                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                </a>
-                                <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne"
-                                    data-bs-parent="#sidenavAccordionPages">
-                                    <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link" href="401.html">401 Page</a>
-                                        <a class="nav-link" href="404.html">404 Page</a>
-                                        <a class="nav-link" href="500.html">500 Page</a>
-                                    </nav>
-                                </div>
-                            </nav>
-                        </div> -->
-                                        <!-- <div class="sb-sidenav-menu-heading">Addons</div>
-                        <a class="nav-link" href="charts.html">
-                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                            Charts
-                        </a>
-                        <a class="nav-link" href="tables.html">
-                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                            Tables
-                        </a> -->
                                     </div>
                                     <div class="nav">
                                         <div class="sb-sidenav-menu-heading">Khác</div>
@@ -149,92 +207,136 @@
                                     </div>
                                 </div>
                                 <div class="sb-sidenav-footer">
-                                    <div class="small">Logged in as:</div>
-                                    Start Bootstrap
+                                    <div class="small">Đăng nhập với:</div>
+                                    Admin
                                 </div>
                             </nav>
                         </div>
                         <div id="layoutSidenav_content">
                             <main>
                                 <div class="container-fluid px-4">
-                                    <h1 class="mt-4">Danh sách đơn hàng</h1>
-                                    <ol class="breadcrumb mb-4">
-                                        <li class="breadcrumb-item active"></li>
-                                    </ol>
-                                </div>
+                                    <div class="page-header">
+                                        <h1 class="mt-2">Quản lý đơn hàng <span class="order-count">(${oders.size()} đơn hàng)</span></h1>
+                                        <ol class="breadcrumb mb-0">
+                                            <li class="breadcrumb-item"><a href="/adminDash">Dashboard</a></li>
+                                            <li class="breadcrumb-item active">Đơn hàng</li>
+                                        </ol>
+                                    </div>
+                                    
+                                    <div class="table-container">
+                                        <table class="order-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Mã đơn</th>
+                                                    <th>Khách hàng</th>
+                                                    <th>Tổng giá trị</th>
+                                                    <th>Trạng thái</th>
+                                                    <th>Thao tác</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <c:forEach items="${oders}" var="oder">
+                                                    <tr>
+                                                        <td><span class="order-id">#${oder.id}</span></td>
+                                                        <td>${oder.receiverName}</td>
+                                                        <td><fmt:formatNumber type="number" value="${oder.totalPrice}" /> VND</td>
+                                                        <td>
+                                                            <c:choose>
+                                                                <c:when test="${oder.status eq 'Pending'}">
+                                                                    <span class="status-badge status-pending">Đang chờ</span>
+                                                                </c:when>
+                                                                <c:when test="${oder.status eq 'Delivering'}">
+                                                                    <span class="status-badge status-delivering">Đang giao</span>
+                                                                </c:when>
+                                                                <c:when test="${oder.status eq 'Finish'}">
+                                                                    <span class="status-badge status-finish">Hoàn tất</span>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <span class="status-badge">${oder.status}</span>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                        </td>
+                                                        <td>
+                                                            <a href="/admin/order/detail/${oder.id}" class="btn-action btn-view">
+                                                                <i class="fas fa-eye"></i> Xem
+                                                            </a>
+                                                            <a href="/admin/order/update/${oder.id}" class="btn-action btn-edit">
+                                                                <i class="fas fa-edit"></i> Sửa
+                                                            </a>
+                                                            <a href="/admin/order/del/${oder.id}" class="btn-action btn-delete">
+                                                                <i class="fas fa-trash"></i> Xóa
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                </c:forEach>
+                                            </tbody>
+                                        </table>
+                                    </div>
 
-                                <table>
-                                    <tr>
-                                        <th>Id</th>
-                                        <th>Tổng giá trị</th>
-                                        <th>Tên khách hàng</th>
-                                        <th>Trạng thái</th>
-                                        <th>Thao tác</th>
-
-                                    </tr>
-                                    <c:forEach items="${oders}" var="oder">
-                                        <tr>
-                                            <td>${oder.id}</td>
-                                            <td>
-                                                <fmt:formatNumber type="number" value="${oder.totalPrice}" />
-                                                Vnd
-                                            </td>
-                                            <td>${oder.receiverName}</td>
-                                            <td>${oder.status}</td>
-
-                                            <td>
-                                                <button type="button" class="btn btn-primary"><a
-                                                        href="/admin/order/detail/${oder.id}"
-                                                        style="color: wheat; text-decoration: none;">Xem</a></button>
-                                                <button type="button" class="btn btn-secondary"><a
-                                                        href="/admin/order/update/${oder.id}"
-                                                        style="color: wheat; text-decoration: none;">Sửa</a></button>
-                                                <button type="button" class="btn btn-success"><a
-                                                        style="color: wheat; text-decoration: none;"
-                                                        href="/admin/order/del/${oder.id}">Xóa</a></button>
-                                            </td>
-                                        </tr>
-                                    </c:forEach>
-
-                                </table>
-                                <nav aria-label="Page navigation example" style="margin-top: 17px;">
-                                    <ul class="pagination justify-content-center">
-
-                                        <c:if test="${currentPage < 2 }">
-                                            <li class="page-item disabled"><a class="page-link" href="">Trước</a>
-                                            </li>
-                                        </c:if>
-                                        <c:if test="${currentPage > 1 }">
-                                            <li class="page-item"><a class="page-link"
-                                                    href="/adminOrder?page=${currentPage-1}">Trước</a>
-                                            </li>
-                                        </c:if>
-
-                                        <c:if test="${totalPage > 0}">
-                                            <c:forEach begin="0" end="${totalPage-1}" varStatus="loop">
-                                                <li
-                                                    class="${(loop.index+1) eq currentPage ? 'page-item active' : 'page-item'}">
-                                                    <a class="page-link"
-                                                        href="/adminOrder?page=${loop.index+1}">${loop.index+1}</a>
+                                    <nav aria-label="Page navigation">
+                                        <ul class="pagination justify-content-center">
+                                            <c:if test="${currentPage < 2}">
+                                                <li class="page-item disabled">
+                                                    <span class="page-link">Trước</span>
                                                 </li>
-                                            </c:forEach>
-                                        </c:if>
+                                            </c:if>
+                                            <c:if test="${currentPage > 1}">
+                                                <li class="page-item">
+                                                    <a class="page-link" href="/adminOrder?page=${currentPage-1}">Trước</a>
+                                                </li>
+                                            </c:if>
 
-                                        <c:if test="${currentPage > (totalPage-1) }">
-                                            <li class="page-item disabled"><a class="page-link" href="">Sau</a></li>
-                                        </c:if>
-                                        <c:if test="${currentPage < totalPage }">
-                                            <li class="page-item"><a class="page-link"
-                                                    href="/adminOrder?page=${currentPage+1}">Sau</a></li>
-                                        </c:if>
+                                            <c:if test="${totalPage > 0}">
+                                                <c:set var="startPage" value="${(currentPage - 2 > 0) ? currentPage - 2 : 1}" />
+                                                <c:set var="endPage" value="${(startPage + 4 < totalPage) ? startPage + 4 : totalPage}" />
+                                                
+                                                <c:if test="${startPage > 1}">
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="/adminOrder?page=1">1</a>
+                                                    </li>
+                                                    <c:if test="${startPage > 2}">
+                                                        <li class="page-item disabled">
+                                                            <span class="page-link">...</span>
+                                                        </li>
+                                                    </c:if>
+                                                </c:if>
+                                                
+                                                <c:forEach begin="${startPage}" end="${endPage}" varStatus="loop">
+                                                    <li class="${(loop.index) eq currentPage ? 'page-item active' : 'page-item'}">
+                                                        <a class="page-link" href="/adminOrder?page=${loop.index}">${loop.index}</a>
+                                                    </li>
+                                                </c:forEach>
+                                                
+                                                <c:if test="${endPage < totalPage}">
+                                                    <c:if test="${endPage < totalPage - 1}">
+                                                        <li class="page-item disabled">
+                                                            <span class="page-link">...</span>
+                                                        </li>
+                                                    </c:if>
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="/adminOrder?page=${totalPage}">${totalPage}</a>
+                                                    </li>
+                                                </c:if>
+                                            </c:if>
 
-                                    </ul>
-                                </nav>
+                                            <c:if test="${currentPage >= totalPage}">
+                                                <li class="page-item disabled">
+                                                    <span class="page-link">Sau</span>
+                                                </li>
+                                            </c:if>
+                                            <c:if test="${currentPage < totalPage}">
+                                                <li class="page-item">
+                                                    <a class="page-link" href="/adminOrder?page=${currentPage+1}">Sau</a>
+                                                </li>
+                                            </c:if>
+                                        </ul>
+                                    </nav>
+                                </div>
                             </main>
                             <footer class="py-4 bg-light mt-auto">
                                 <div class="container-fluid px-4">
                                     <div class="d-flex align-items-center justify-content-between small">
-                                        <div class="text-muted">Copyright &copy; Your Website 2023</div>
+                                        <div class="text-muted">Copyright &copy; Laptop Shop 2024</div>
                                         <div>
                                             <a href="#">Privacy Policy</a>
                                             &middot;
@@ -248,13 +350,6 @@
                     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
                         crossorigin="anonymous"></script>
                     <script src="/js/scripts.js"></script>
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
-                        crossorigin="anonymous"></script>
-                    <script src="/js/chart-area-demo.js"></script>
-                    <script src="/js/chart-bar-demo.js"></script>
-                    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
-                        crossorigin="anonymous"></script>
-                    <script src="/js/datatables-simple-demo.js"></script>
                 </body>
 
                 </html>
