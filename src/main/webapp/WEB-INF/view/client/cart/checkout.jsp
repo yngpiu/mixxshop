@@ -176,6 +176,38 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
           flex-direction: column-reverse;
         }
       }
+
+      .error-message {
+        color: #dc3545;
+        font-size: 0.85rem;
+        margin-top: 5px;
+        display: block;
+      }
+      .form-control.is-invalid {
+        border-color: #dc3545;
+      }
+      .validation-shake {
+        animation: shake 0.5s;
+      }
+      @keyframes shake {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        10%,
+        30%,
+        50%,
+        70%,
+        90% {
+          transform: translateX(-5px);
+        }
+        20%,
+        40%,
+        60%,
+        80% {
+          transform: translateX(5px);
+        }
+      }
     </style>
   </head>
 
@@ -288,5 +320,98 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
         <p>Cảm ơn bạn đã mua sắm tại cửa hàng của chúng tôi</p>
       </div>
     </div>
+
+    <!-- Form validation script -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const checkoutForm = document.querySelector(
+          'form[action="/create/order"]'
+        );
+
+        if (checkoutForm) {
+          checkoutForm.addEventListener('submit', function (event) {
+            let isValid = true;
+
+            // Clear previous error messages
+            const errorMessages = document.querySelectorAll('.error-message');
+            errorMessages.forEach(el => el.remove());
+
+            const inputs = checkoutForm.querySelectorAll('.form-control');
+            inputs.forEach(input => {
+              input.classList.remove('is-invalid');
+            });
+
+            // Get form fields
+            const nameInput = document.getElementById('receiverName');
+            const addressInput = document.getElementById('receiverAddress');
+            const phoneInput = document.getElementById('receiverPhone');
+
+            // Validate name (required)
+            if (!nameInput.value.trim()) {
+              showError(nameInput, 'Vui lòng nhập họ tên người nhận');
+              isValid = false;
+            } else if (nameInput.value.trim().length < 2) {
+              showError(nameInput, 'Họ tên phải có ít nhất 2 ký tự');
+              isValid = false;
+            }
+
+            // Validate address (required)
+            if (!addressInput.value.trim()) {
+              showError(addressInput, 'Vui lòng nhập địa chỉ giao hàng');
+              isValid = false;
+            } else if (addressInput.value.trim().length < 5) {
+              showError(addressInput, 'Địa chỉ phải có ít nhất 5 ký tự');
+              isValid = false;
+            }
+
+            // Validate phone (required + format)
+            if (!phoneInput.value.trim()) {
+              showError(phoneInput, 'Vui lòng nhập số điện thoại');
+              isValid = false;
+            } else {
+              // Vietnamese phone number format (10 digits, starting with 0)
+              const phonePattern = /^(0|\+84)[3|5|7|8|9][0-9]{8}$/;
+              if (!phonePattern.test(phoneInput.value.trim())) {
+                showError(
+                  phoneInput,
+                  'Số điện thoại không hợp lệ. Vui lòng nhập số điện thoại Việt Nam'
+                );
+                isValid = false;
+              }
+            }
+
+            // If form is not valid, prevent submission
+            if (!isValid) {
+              event.preventDefault();
+
+              // Scroll to the first error
+              const firstError = document.querySelector('.is-invalid');
+              if (firstError) {
+                firstError.scrollIntoView({
+                  behavior: 'smooth',
+                  block: 'center',
+                });
+                firstError.classList.add('validation-shake');
+                setTimeout(() => {
+                  firstError.classList.remove('validation-shake');
+                }, 500);
+              }
+            }
+          });
+        }
+
+        // Function to show error messages
+        function showError(input, message) {
+          input.classList.add('is-invalid');
+
+          const errorDiv = document.createElement('div');
+          errorDiv.className = 'error-message';
+          errorDiv.textContent = message;
+
+          const formGroup = input.closest('.form-group');
+          formGroup.appendChild(errorDiv);
+        }
+      });
+    </script>
   </body>
 </html>
