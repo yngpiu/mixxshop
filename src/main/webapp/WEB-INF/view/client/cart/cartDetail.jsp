@@ -262,57 +262,52 @@
                                                         <div class="d-flex align-items-center">
                                                             <img src="/images/product/${cartDetail.products.image}"
                                                                 class="img-fluid me-5 rounded-circle"
-                                                                style="width: 80px; height: 80px;" alt="">
+                                                                style="width: 80px; height: 80px; object-fit: cover;" alt="">
                                                         </div>
                                                     </th>
 
                                                     <td>
-                                                        <p class="mb-0 mt-4">${cartDetail.products.name}</p>
+                                                        <p class="mb-0 mt-4 fw-bold">${cartDetail.products.name}</p>
                                                     </td>
                                                     <td>
-                                                        <p class="mb-0 mt-4">
-
+                                                        <p class="mb-0 mt-4 text-primary">
                                                             <fmt:formatNumber type="number"
                                                                 value="${cartDetail.products.price}" />Vnd
                                                         </p>
                                                     </td>
                                                     <td>
-                                                        <div class="input-group quantity mt-4" style="width: 100px;">
-                                                            <!-- <div class="input-group-btn">
-                                                                <button
+                                                        <div class="input-group quantity mt-4" style="width: 120px;">
+                                                            <div class="input-group-btn">
+                                                                <button type="button"
                                                                     class="btn btn-sm btn-minus rounded-circle bg-light border">
                                                                     <i class="fa fa-minus"></i>
                                                                 </button>
-                                                            </div> -->
+                                                            </div>
                                                             <form:input type="text"
                                                                 class="form-control form-control-sm text-center border-0"
                                                                 value="${cartDetail.quantity}" path="quantity" />
-                                                            <!-- <div class="input-group-btn">
-                                                                <button
+                                                            <div class="input-group-btn">
+                                                                <button type="button"
                                                                     class="btn btn-sm btn-plus rounded-circle bg-light border">
                                                                     <i class="fa fa-plus"></i>
                                                                 </button>
-                                                            </div> -->
+                                                            </div>
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <p class="mb-0 mt-4" id="tongtien">
-
+                                                        <p class="mb-0 mt-4 fw-bold text-success" id="tongtien">
                                                             <fmt:formatNumber type="number"
                                                                 value="${cartDetail.price*cartDetail.quantity}" />
                                                             Vnd
                                                         </p>
                                                     </td>
                                                     <td>
-
-                                                        <button class="btn btn-md rounded-circle bg-light border mt-4"
-                                                            type="submit">
-                                                            <i class="fa fa-times text-danger"></i>
-                                                            <button>
+                                                        <button class="btn btn-md rounded-circle bg-danger text-white border mt-4"
+                                                            type="submit" title="Xóa sản phẩm">
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
+                                                    </td>
                                                 </form:form>
-
-                                                </td>
-
                                             </tr>
                                         </c:forEach>
 
@@ -329,13 +324,13 @@
                             <div class="row g-4 justify-content-start">
                                 <div class="col-8"></div>
                                 <div class="col-sm-8 col-md-7 col-lg-6 col-xl-4">
-                                    <div class="bg-light rounded">
+                                    <div class="bg-light rounded shadow-sm">
                                         <div class="p-4">
-                                            <h1 class="display-6 mb-4">Thông Tin <span class="fw-normal">Đơn Hàng</span>
+                                            <h1 class="display-6 mb-4">Thông Tin <span class="fw-normal text-primary">Đơn Hàng</span>
                                             </h1>
                                             <div class="d-flex justify-content-between mb-4">
                                                 <h5 class="mb-0 me-4">Giá Tiền</h5>
-                                                <p class="mb-0">
+                                                <p class="mb-0 fw-bold">
                                                     <fmt:formatNumber type="number" value="${SumM}" />
                                                     Vnd
                                                 </p>
@@ -350,15 +345,17 @@
                                         </div>
                                         <div class="py-4 mb-4 border-top border-bottom d-flex justify-content-between">
                                             <h5 class="mb-0 ps-4 me-4">Tạm Tính</h5>
-                                            <p class="mb-0 pe-4">
+                                            <p class="mb-0 pe-4 fw-bold text-success">
                                                 <fmt:formatNumber type="number" value="${SumM}" />
                                                 Vnd
                                             </p>
                                         </div>
                                         <form:form action="/checkout" method="get">
                                             <button
-                                                class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4"
-                                                type="submit">Xác Nhận Đơn Hàng</button>
+                                                class="btn btn-primary w-100 rounded-0 rounded-bottom py-3 text-uppercase mb-4"
+                                                type="submit">
+                                                <i class="fa fa-shopping-cart me-2"></i>Xác Nhận Đơn Hàng
+                                            </button>
                                         </form:form>
                                     </div>
                                 </div>
@@ -460,8 +457,8 @@
                                             Name</a>, All right reserved.</span>
                                 </div>
                                 <div class="col-md-6 my-auto text-center text-md-end text-white">
-                                    <!--/*** This template is free as long as you keep the below author’s credit link/attribution link/backlink. ***/-->
-                                    <!--/*** If you'd like to use the template without the below author’s credit link/attribution link/backlink, ***/-->
+                                    <!--/*** This template is free as long as you keep the below author's credit link/attribution link/backlink. ***/-->
+                                    <!--/*** If you'd like to use the template without the below author's credit link/attribution link/backlink, ***/-->
                                     <!--/*** you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". ***/-->
                                     Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
                                     Distributed By <a class="border-bottom" href="https://themewagon.com">ThemeWagon</a>
@@ -492,6 +489,31 @@
 
                     <!-- Template Javascript -->
                     <script src="/js/client/main.js"></script>
+                    <script>
+                        // Quantity handling script
+                        document.addEventListener('DOMContentLoaded', function() {
+                            const minusButtons = document.querySelectorAll('.btn-minus');
+                            const plusButtons = document.querySelectorAll('.btn-plus');
+                            
+                            minusButtons.forEach(button => {
+                                button.addEventListener('click', function() {
+                                    const input = this.closest('.quantity').querySelector('input');
+                                    let value = parseInt(input.value);
+                                    if (value > 1) {
+                                        input.value = value - 1;
+                                    }
+                                });
+                            });
+                            
+                            plusButtons.forEach(button => {
+                                button.addEventListener('click', function() {
+                                    const input = this.closest('.quantity').querySelector('input');
+                                    let value = parseInt(input.value);
+                                    input.value = value + 1;
+                                });
+                            });
+                        });
+                    </script>
                 </body>
 
                 </html>

@@ -220,8 +220,7 @@
 
                     <!-- Single Page Header start -->
                     <div class="container-fluid page-header py-5">
-                        <h1 class="text-center text-white display-6">Hàng Bạn Đã Mua</h1>
-
+                        <h1 class="text-center text-white display-6">Lịch Sử Mua Hàng</h1>
                     </div>
                     <!-- Single Page Header End -->
 
@@ -230,22 +229,19 @@
                     <div class="container-fluid py-5">
                         <div class="container py-5">
                             <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
+                                <table class="table table-hover shadow-sm">
+                                    <thead class="bg-primary text-white">
                                         <tr>
-                                            <!-- <th scope="col">Id</th> -->
                                             <th scope="col">Sản Phẩm</th>
                                             <th scope="col">Tên Sản Phẩm</th>
                                             <th scope="col">Giá</th>
                                             <th scope="col">Số Lượng</th>
                                             <th scope="col">Tổng tiền</th>
-
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <c:forEach var="orderDetail" items="${orderDetails}">
                                             <tr>
-
                                                 <td style="display: none;">
                                                     <p class="mb-0 mt-4">
                                                         <input type="text" value="${orderDetail.id}" />
@@ -255,63 +251,44 @@
                                                     <div class="d-flex align-items-center">
                                                         <img src="/images/product/${orderDetail.products.image}"
                                                             class="img-fluid me-5 rounded-circle"
-                                                            style="width: 80px; height: 80px;" alt="">
+                                                            style="width: 80px; height: 80px; object-fit: cover;" alt="">
                                                     </div>
                                                 </th>
 
                                                 <td>
-                                                    <p class="mb-0 mt-4">${orderDetail.products.name}</p>
+                                                    <p class="mb-0 mt-4 fw-bold">${orderDetail.products.name}</p>
                                                 </td>
                                                 <td>
-                                                    <p class="mb-0 mt-4">
-
+                                                    <p class="mb-0 mt-4 text-primary">
                                                         <fmt:formatNumber type="number"
                                                             value="${orderDetail.products.price}" />Vnd
                                                     </p>
                                                 </td>
                                                 <td>
                                                     <div class="input-group quantity mt-4" style="width: 100px;">
-                                                        <!-- <div class="input-group-btn">
-                                                                <button
-                                                                    class="btn btn-sm btn-minus rounded-circle bg-light border">
-                                                                    <i class="fa fa-minus"></i>
-                                                                </button>
-                                                            </div> -->
                                                         <input type="text"
-                                                            class="form-control form-control-sm text-center border-0"
-                                                            value="${orderDetail.quantity}" />
-                                                        <!-- <div class="input-group-btn">
-                                                                <button
-                                                                    class="btn btn-sm btn-plus rounded-circle bg-light border">
-                                                                    <i class="fa fa-plus"></i>
-                                                                </button>
-                                                            </div> -->
+                                                            class="form-control form-control-sm text-center border-0 bg-light"
+                                                            value="${orderDetail.quantity}" readonly />
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <p class="mb-0 mt-4" id="tongtien">
-
+                                                    <p class="mb-0 mt-4 fw-bold text-success">
                                                         <fmt:formatNumber type="number"
                                                             value="${orderDetail.price*orderDetail.quantity}" />
                                                         Vnd
                                                     </p>
                                                 </td>
-
-
                                             </tr>
                                         </c:forEach>
-
                                     </tbody>
                                 </table>
                             </div>
-                            <!-- <div class="mt-5">
-                                <input type="text" class="border-0 border-bottom rounded me-5 py-3 mb-4"
-                                    placeholder="Coupon Code">
-                                <button class="btn border-secondary rounded-pill px-4 py-3 text-primary"
-                                    type="button">Apply
-                                    Coupon</button>
-                            </div> -->
-
+                            
+                            <div class="text-center mt-5">
+                                <a href="/" class="btn btn-primary rounded-pill px-4 py-3">
+                                    <i class="fa fa-shopping-bag me-2"></i>Tiếp tục mua sắm
+                                </a>
+                            </div>
                         </div>
                     </div>
                     <!-- Cart Page End -->
@@ -409,8 +386,8 @@
                                             Name</a>, All right reserved.</span>
                                 </div>
                                 <div class="col-md-6 my-auto text-center text-md-end text-white">
-                                    <!--/*** This template is free as long as you keep the below author’s credit link/attribution link/backlink. ***/-->
-                                    <!--/*** If you'd like to use the template without the below author’s credit link/attribution link/backlink, ***/-->
+                                    <!--/*** This template is free as long as you keep the below author's credit link/attribution link/backlink. ***/-->
+                                    <!--/*** If you'd like to use the template without the below author's credit link/attribution link/backlink, ***/-->
                                     <!--/*** you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". ***/-->
                                     Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
                                     Distributed By <a class="border-bottom" href="https://themewagon.com">ThemeWagon</a>
