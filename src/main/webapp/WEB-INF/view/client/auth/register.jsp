@@ -15,7 +15,7 @@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     />
-    <title>Đăng ký | Laptop Shop</title>
+    <title>Đăng ký | Mixxshop</title>
     <style>
       :root {
         --primary-color: #4361ee;
@@ -305,10 +305,10 @@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <div class="register-container">
       <div class="register-image">
         <div class="register-image-content">
-          <h2>Tham gia cùng Laptop Shop</h2>
+          <h2>Tham gia cùng Mixxshop</h2>
           <p>
-            Đăng ký để trở thành thành viên của gia đình Laptop Shop và nhận
-            nhiều ưu đãi hấp dẫn!
+            Đăng ký để trở thành thành viên của gia đình Mixxshop và nhận nhiều
+            ưu đãi hấp dẫn!
           </p>
 
           <ul>

@@ -123,8 +123,8 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
       </div>
       <h1>Đặt Hàng Thành Công!</h1>
       <p>
-        Cảm ơn bạn đã mua sắm tại Laptop Shop. Chúng tôi đã nhận được đơn hàng
-        của bạn và sẽ xử lý trong thời gian sớm nhất.
+        Cảm ơn bạn đã mua sắm tại Mixxshop. Chúng tôi đã nhận được đơn hàng của
+        bạn và sẽ xử lý trong thời gian sớm nhất.
       </p>
       <a href="/" class="action-button">
         <i class="fas fa-home"></i>Tiếp Tục Mua Sắm

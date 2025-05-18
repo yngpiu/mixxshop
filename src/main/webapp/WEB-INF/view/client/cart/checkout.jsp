@@ -7,7 +7,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Checkout - Laptop Shop</title>
+    <title>Checkout - Mixxshop</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
       rel="stylesheet"
@@ -284,7 +284,7 @@ uri="http://java.sun.com/jsp/jstl/fmt" %>
       </div>
 
       <div class="store-info">
-        <div class="store-name">Laptop Shop</div>
+        <div class="store-name">Mixxshop</div>
         <p>Cảm ơn bạn đã mua sắm tại cửa hàng của chúng tôi</p>
       </div>
     </div>

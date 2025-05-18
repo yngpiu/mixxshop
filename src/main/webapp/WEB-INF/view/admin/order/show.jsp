@@ -12,7 +12,7 @@
                     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
                     <meta name="description" content="" />
                     <meta name="author" content="" />
-                    <title>Quản lý đơn hàng - Laptop Shop</title>
+                    <title>Quản lý đơn hàng - Mixxshop</title>
                     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
                     <link href="/css/styles.css" rel="stylesheet" />
                     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
@@ -128,20 +128,29 @@
                             font-size: 1rem;
                         }
                         
-                        /* Pagination styling */
+                        /* Pagination styling - Updated to green theme */
                         .pagination {
                             margin-top: 20px;
                         }
                         
                         .pagination .page-link {
-                            color: #343a40;
+                            color: #3CB815;
                             border-radius: 4px;
                             margin: 0 3px;
                         }
                         
                         .pagination .page-item.active .page-link {
-                            background-color: #343a40;
-                            border-color: #343a40;
+                            background-color: #3CB815;
+                            border-color: #3CB815;
+                            color: white;
+                        }
+                        
+                        .pagination .page-link:hover:not(.active) {
+                            background-color: #e9ecef;
+                        }
+                        
+                        .pagination .page-item.disabled .page-link {
+                            color: #6c757d;
                         }
                         
                         /* Mobile responsive */
@@ -164,7 +173,7 @@
                 <body class="sb-nav-fixed">
                     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
                         <!-- Navbar Brand-->
-                        <a class="navbar-brand ps-3" href="index.html">Laptop Shop</a>
+                        <a class="navbar-brand ps-3" href="index.html">Mixxshop</a>
                         <!-- Sidebar Toggle-->
                         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle"
                             href="#!"><i class="fas fa-bars"></i></button>
@@ -222,7 +231,7 @@
                                             <li class="breadcrumb-item active">Đơn hàng</li>
                                         </ol>
                                     </div>
-                                    
+
                                     <div class="table-container">
                                         <table class="order-table">
                                             <thead>
@@ -336,7 +345,7 @@
                             <footer class="py-4 bg-light mt-auto">
                                 <div class="container-fluid px-4">
                                     <div class="d-flex align-items-center justify-content-between small">
-                                        <div class="text-muted">Copyright &copy; Laptop Shop 2024</div>
+                                        <div class="text-muted">Copyright &copy; Mixxshop 2024</div>
                                         <div>
                                             <a href="#">Privacy Policy</a>
                                             &middot;
