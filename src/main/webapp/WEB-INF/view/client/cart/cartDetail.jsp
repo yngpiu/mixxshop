@@ -260,7 +260,7 @@
                                                     </td>
                                                     <th scope="row">
                                                         <div class="d-flex align-items-center">
-                                                            <img src="/images/product/${cartDetail.products.image}"
+                                                            <img src="${cartDetail.products.image}"
                                                                 class="img-fluid me-5 rounded-circle"
                                                                 style="width: 80px; height: 80px; object-fit: cover;" alt="">
                                                         </div>
