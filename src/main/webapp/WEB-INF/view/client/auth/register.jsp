@@ -293,7 +293,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
         }
 
         .register-form {
-          padding: 40px 20px;
+          padding: 30px 20px;
         }
 
         .name-fields {
@@ -309,159 +309,97 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
         <div class="register-image-content">
           <h2>Tham gia cùng Mixxshop</h2>
           <p>
-            Đăng ký để trở thành thành viên của gia đình Mixxshop và nhận nhiều
-            ưu đãi hấp dẫn!
+            Đăng ký tài khoản để trải nghiệm mua sắm tuyệt vời cùng chúng tôi
           </p>
-
           <ul>
             <li>
-              <i class="fas fa-check-circle"></i> Ưu đãi đặc biệt dành riêng cho
-              thành viên
+              <i class="fas fa-check-circle"></i> Nhận thông tin về sản phẩm mới
             </li>
             <li>
-              <i class="fas fa-check-circle"></i> Lưu trữ lịch sử mua hàng và
-              theo dõi đơn hàng
+              <i class="fas fa-check-circle"></i> Theo dõi đơn hàng dễ dàng
             </li>
             <li>
-              <i class="fas fa-check-circle"></i> Thanh toán nhanh chóng, an
-              toàn
-            </li>
-            <li>
-              <i class="fas fa-check-circle"></i> Hỗ trợ kỹ thuật ưu tiên 24/7
+              <i class="fas fa-check-circle"></i> Ưu đãi độc quyền cho thành
+              viên
             </li>
           </ul>
         </div>
       </div>
       <div class="register-form">
-        <h1>Đăng ký tài khoản</h1>
-        <p class="register-subtitle">Tạo tài khoản mới để bắt đầu mua sắm</p>
-
-        <form:form action="/register" method="post" modelAttribute="regisNew">
-          <c:if test="${emailExist}">
-            <div class="error-box">
-              <i class="fas fa-exclamation-circle"></i>
-              Email đã tồn tại trong hệ thống, vui lòng sử dụng email khác.
-            </div>
-          </c:if>
-
-          <c:if test="${showMess}">
-            <div class="error-box">
-              <i class="fas fa-exclamation-circle"></i>
-              Mật khẩu xác nhận không khớp, vui lòng thử lại.
-            </div>
-          </c:if>
-
+        <h1>Đăng ký</h1>
+        <p class="register-subtitle">Tạo tài khoản để bắt đầu mua sắm</p>
+        <form:form action="/register" method="post" modelAttribute="newUser">
           <div class="name-fields">
             <div class="form-floating">
               <form:input
+                path="firstname"
                 type="text"
                 class="form-control"
-                id="firstName"
-                path="firstName"
+                id="firstname"
                 placeholder="Họ"
-                required="required"
+                required="true"
               />
-              <label for="firstName">Họ</label>
-              <form:errors path="firstName" cssClass="error-message">
-                <i class="fas fa-exclamation-circle"></i>
-              </form:errors>
+              <form:label path="firstname" for="firstname">Họ</form:label>
+              <form:errors path="firstname" cssClass="error-message" />
             </div>
-
             <div class="form-floating">
               <form:input
+                path="lastname"
                 type="text"
                 class="form-control"
-                id="lastName"
-                path="lastName"
+                id="lastname"
                 placeholder="Tên"
-                required="required"
+                required="true"
               />
-              <label for="lastName">Tên</label>
-              <form:errors path="lastName" cssClass="error-message">
-                <i class="fas fa-exclamation-circle"></i>
-              </form:errors>
+              <form:label path="lastname" for="lastname">Tên</form:label>
+              <form:errors path="lastname" cssClass="error-message" />
             </div>
           </div>
-
           <div class="form-floating">
             <form:input
+              path="email"
               type="email"
               class="form-control"
               id="email"
-              path="email"
-              placeholder="Email"
-              required="required"
+              placeholder="name@example.com"
+              required="true"
             />
-            <label for="email">Email</label>
-            <form:errors path="email" cssClass="error-message">
-              <i class="fas fa-exclamation-circle"></i>
-            </form:errors>
+            <form:label path="email" for="email">Email</form:label>
+            <form:errors path="email" cssClass="error-message" />
           </div>
-
           <div class="form-floating">
             <form:input
+              path="password"
               type="password"
               class="form-control"
               id="password"
-              path="password"
               placeholder="Mật khẩu"
-              required="required"
+              required="true"
             />
-            <label for="password">Mật khẩu</label>
-            <form:errors path="password" cssClass="error-message">
-              <i class="fas fa-exclamation-circle"></i>
-            </form:errors>
+            <form:label path="password" for="password">Mật khẩu</form:label>
+            <form:errors path="password" cssClass="error-message" />
           </div>
-
-          <div class="password-requirements">
-            <h6>Yêu cầu mật khẩu:</h6>
-            <ul>
-              <li><i class="fas fa-circle"></i> Tối thiểu 8 ký tự</li>
-              <li><i class="fas fa-circle"></i> Ít nhất 1 chữ cái viết hoa</li>
-              <li><i class="fas fa-circle"></i> Ít nhất 1 chữ số</li>
-              <li><i class="fas fa-circle"></i> Ít nhất 1 ký tự đặc biệt</li>
-            </ul>
-          </div>
-
           <div class="form-floating">
             <form:input
+              path="repass"
               type="password"
               class="form-control"
-              id="repeatPassword"
-              path="repeatPassword"
-              placeholder="Xác nhận mật khẩu"
-              required="required"
+              id="repass"
+              placeholder="Nhập lại mật khẩu"
+              required="true"
             />
-            <label for="repeatPassword">Xác nhận mật khẩu</label>
-            <form:errors path="repeatPassword" cssClass="error-message">
-              <i class="fas fa-exclamation-circle"></i>
-            </form:errors>
+            <form:label path="repass" for="repass"
+              >Nhập lại mật khẩu</form:label
+            >
+            <form:errors path="repass" cssClass="error-message" />
           </div>
-
-          <button type="submit" class="btn btn-primary w-100 mt-3">
-            Đăng ký tài khoản
-          </button>
-
-          <div class="divider">
-            <span>HOẶC</span>
-          </div>
-
-          <div class="social-login d-flex justify-content-center gap-3 mb-3">
-            <button type="button" class="btn btn-outline-secondary flex-grow-1">
-              <i class="fab fa-google me-2"></i> Google
-            </button>
-            <button type="button" class="btn btn-outline-secondary flex-grow-1">
-              <i class="fab fa-facebook-f me-2"></i> Facebook
-            </button>
-          </div>
-
-          <div class="login-link">
-            Bạn đã có tài khoản? <a href="/login">Đăng nhập</a>
-          </div>
+          <button type="submit" class="btn btn-primary w-100">Đăng ký</button>
         </form:form>
+        <div class="login-link">
+          Đã có tài khoản? <a href="/login">Đăng nhập</a>
+        </div>
       </div>
     </div>
-
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"

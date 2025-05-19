@@ -163,31 +163,6 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
         box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
       }
 
-      .social-login {
-        display: flex;
-        justify-content: center;
-        margin: 20px 0;
-      }
-
-      .social-btn {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0 10px;
-        background-color: #f8f9fa;
-        color: var(--text-color);
-        transition: all 0.3s ease;
-        border: none;
-      }
-
-      .social-btn:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-      }
-
       .register-link {
         text-align: center;
         margin-top: 15px;
@@ -198,10 +173,6 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
         color: var(--primary-color);
         text-decoration: none;
         font-weight: 600;
-      }
-
-      .register-link a:hover {
-        text-decoration: underline;
       }
 
       .error-message {
@@ -244,7 +215,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
         }
 
         .login-form {
-          padding: 40px 20px;
+          padding: 30px 20px;
         }
       }
     </style>
@@ -253,7 +224,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
     <div class="login-container">
       <div class="login-image">
         <div class="login-image-content">
-          <h2>Chào mừng đến với Mixxshop</h2>
+          <h2>Chào mừng bạn đến với Mixxshop</h2>
           <p>
             Nơi cung cấp những mẫu laptop chất lượng với giá tốt nhất thị
             trường. Đăng nhập để khám phá ngay!
@@ -266,9 +237,8 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
       </div>
       <div class="login-form">
         <h1>Đăng nhập</h1>
-        <p class="login-subtitle">Vui lòng đăng nhập để tiếp tục</p>
-
-        <form action="/login" method="post">
+        <p class="login-subtitle">Vui lòng đăng nhập để tiếp tục mua sắm</p>
+        <form:form action="/login" method="post">
           <c:if test="${param.error != null}">
             <div class="error-message">
               <i class="fas fa-exclamation-circle"></i>
@@ -286,12 +256,12 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
             <input
               type="email"
               class="form-control"
-              id="username"
+              id="email"
               name="username"
-              placeholder="Email"
+              placeholder="name@example.com"
               required
             />
-            <label for="username">Email</label>
+            <label for="email">Email</label>
           </div>
 
           <div class="form-floating">
@@ -308,18 +278,10 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
           <div class="remember-forgot">
             <div class="remember-me">
-              <input type="checkbox" id="remember-me" name="remember-me" />
-              <label for="remember-me">Nhớ tài khoản</label>
+              <input type="checkbox" id="remember" name="remember-me" />
+              <label for="remember">Ghi nhớ đăng nhập</label>
             </div>
-            <a
-              href="#"
-              style="
-                color: var(--primary-color);
-                text-decoration: none;
-                font-weight: 500;
-              "
-              >Quên mật khẩu?</a
-            >
+            <a href="#" class="forgot-password">Quên mật khẩu?</a>
           </div>
 
           <input
@@ -328,23 +290,10 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
             value="${_csrf.token}"
           />
           <button type="submit" class="btn btn-primary w-100">Đăng nhập</button>
-
-          <div class="social-login">
-            <button type="button" class="social-btn">
-              <i class="fab fa-google"></i>
-            </button>
-            <button type="button" class="social-btn">
-              <i class="fab fa-facebook-f"></i>
-            </button>
-            <button type="button" class="social-btn">
-              <i class="fab fa-apple"></i>
-            </button>
-          </div>
-
-          <div class="register-link">
-            Bạn chưa có tài khoản? <a href="/register">Đăng ký ngay</a>
-          </div>
-        </form>
+        </form:form>
+        <div class="register-link">
+          Chưa có tài khoản? <a href="/register">Đăng ký ngay</a>
+        </div>
       </div>
     </div>
 
