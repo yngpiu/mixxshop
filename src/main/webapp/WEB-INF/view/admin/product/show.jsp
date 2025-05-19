@@ -11,26 +11,145 @@
                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
                 <meta name="description" content="" />
                 <meta name="author" content="" />
-                <title>Dashboard - SB Admin</title>
+                <title>Quản lý sản phẩm - Mixxshop</title>
                 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
                 <link href="/css/styles.css" rel="stylesheet" />
                 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
                 <style>
-                    table {
-                        font-family: arial, sans-serif;
-                        border-collapse: collapse;
+                    .table-container {
+                        background-color: #fff;
+                        border-radius: 8px;
+                        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                        overflow: hidden;
+                        margin-bottom: 2rem;
+                    }
+                    
+                    .product-table {
                         width: 100%;
+                        border-collapse: collapse;
                     }
-
-                    td,
-                    th {
-                        border: 1px solid #dddddd;
+                    
+                    .product-table th {
+                        background-color: #f8f9fa;
+                        color: #495057;
+                        font-weight: 600;
+                        text-transform: uppercase;
+                        font-size: 0.85rem;
+                        padding: 15px;
                         text-align: left;
-                        padding: 8px;
+                        border-bottom: 2px solid #dee2e6;
                     }
-
-                    tr:nth-child(even) {
-                        background-color: #dddddd;
+                    
+                    .product-table td {
+                        padding: 15px;
+                        vertical-align: middle;
+                        border-bottom: 1px solid #e9ecef;
+                    }
+                    
+                    .product-table tr:hover {
+                        background-color: #f8f9fa;
+                    }
+                    
+                    .product-id {
+                        font-weight: 600;
+                        color: #495057;
+                    }
+                    
+                    .btn-action {
+                        padding: 5px 15px;
+                        border-radius: 4px;
+                        margin-right: 5px;
+                        border: none;
+                        color: white !important;
+                        text-decoration: none;
+                        display: inline-block;
+                        transition: all 0.3s;
+                    }
+                    
+                    .btn-view {
+                        background-color: #007bff;
+                    }
+                    
+                    .btn-edit {
+                        background-color: #6c757d;
+                    }
+                    
+                    .btn-delete {
+                        background-color: #dc3545;
+                    }
+                    
+                    .btn-add {
+                        background-color: #28a745;
+                        color: white;
+                        text-decoration: none;
+                        padding: 8px 16px;
+                        border-radius: 4px;
+                        display: inline-block;
+                        margin-bottom: 20px;
+                        transition: all 0.3s;
+                    }
+                    
+                    .btn-action:hover, .btn-add:hover {
+                        opacity: 0.85;
+                        color: white;
+                    }
+                    
+                    .page-header {
+                        background-color: #fff;
+                        border-radius: 8px;
+                        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+                        padding: 20px;
+                        margin-bottom: 20px;
+                    }
+                    
+                    .page-header h1 {
+                        color: #343a40;
+                        font-weight: 600;
+                        margin-bottom: 5px;
+                    }
+                    
+                    .product-count {
+                        font-weight: normal;
+                        color: #6c757d;
+                        font-size: 1rem;
+                    }
+                    
+                    .pagination {
+                        margin-top: 20px;
+                    }
+                    
+                    .pagination .page-link {
+                        color: #3CB815;
+                        border-radius: 4px;
+                        margin: 0 3px;
+                    }
+                    
+                    .pagination .page-item.active .page-link {
+                        background-color: #3CB815;
+                        border-color: #3CB815;
+                        color: white;
+                    }
+                    
+                    .pagination .page-link:hover:not(.active) {
+                        background-color: #e9ecef;
+                    }
+                    
+                    .pagination .page-item.disabled .page-link {
+                        color: #6c757d;
+                    }
+                    
+                    @media (max-width: 992px) {
+                        .btn-action {
+                            padding: 4px 10px;
+                            font-size: 0.85rem;
+                        }
+                    }
+                    
+                    @media (max-width: 768px) {
+                        .product-table {
+                            display: block;
+                            overflow-x: auto;
+                        }
                     }
                 </style>
             </head>
@@ -64,11 +183,11 @@
                                         <div class="sb-nav-link-icon"><i class="fa-solid fa-users"></i></div>
                                         Quản lý người dùng
                                     </a>
-                                    <a class="nav-link" href="/adminProduct" style="background-color: brown;">
+                                    <a class="nav-link active" href="/adminProduct">
                                         <div class="sb-nav-link-icon"><i class="fa-brands fa-product-hunt"></i></div>
                                         Quản lý sản phẩm
                                     </a>
-                                    <a class="nav-link" href="adminOrder">
+                                    <a class="nav-link" href="/adminOrder">
                                         <div class="sb-nav-link-icon"><i class="fa-regular fa-newspaper"></i></div>
                                         Quản lý đơn hàng
                                     </a>
@@ -152,98 +271,70 @@
                     <div id="layoutSidenav_content">
                         <main>
                             <div class="container-fluid px-4">
-                                <h1 class="mt-4">Danh sách sản phẩm</h1>
-                                <ol class="breadcrumb mb-4">
-                                    <li class="breadcrumb-item active"></li>
-                                </ol>
-                            </div>
+                                <div class="page-header">
+                                    <h1>Quản lý sản phẩm</h1>
+                                    <p class="product-count">Tổng số sản phẩm: ${products.size()}</p>
+                                </div>
 
-                            <th>
-                                <button type="button" class="btn btn-danger"><a href="/create/product"
-                                        style="text-decoration: none; color: wheat">Thêm sản phẩm</a></button>
-                            </th>
+                                <a href="/create/product" class="btn-add">
+                                    <i class="fas fa-plus"></i> Thêm sản phẩm mới
+                                </a>
 
-                            <table style="margin-top: 17px;">
-                                <tr>
-                                    <th>Id</th>
-                                    <th>Tên sản phẩm</th>
-                                    <th>Hãng</th>
-                                    <th>Thao tác</th>
+                                <div class="table-container">
+                                    <table class="product-table">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Tên sản phẩm</th>
+                                                <th>Hãng</th>
+                                                <th>Thao tác</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <c:forEach items="${products}" var="product">
+                                                <tr>
+                                                    <td class="product-id">${product.id}</td>
+                                                    <td>${product.name}</td>
+                                                    <td>${product.factory}</td>
+                                                    <td>
+                                                        <a href="/showDetail/${product.id}" class="btn-action btn-view">
+                                                            <i class="fas fa-eye"></i> Xem
+                                                        </a>
+                                                        <a href="/editProduct/${product.id}" class="btn-action btn-edit">
+                                                            <i class="fas fa-edit"></i> Sửa
+                                                        </a>
+                                                        <a href="/del/product/${product.id}" class="btn-action btn-delete">
+                                                            <i class="fas fa-trash"></i> Xóa
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </c:forEach>
+                                        </tbody>
+                                    </table>
+                                </div>
 
-                                </tr>
-                                <c:forEach items="${products}" var="product">
-                                    <tr>
-                                        <td>${product.id}</td>
-                                        <td>${product.name}</td>
-
-
-                                        <td>${product.factory}</td>
-
-                                        <td>
-                                            <button type="button" class="btn btn-primary"><a
-                                                    href="/showDetail/${product.id}"
-                                                    style="color: wheat; text-decoration: none;">Xem</a></button>
-                                            <button type="button" class="btn btn-secondary"><a
-                                                    href="/editProduct/${product.id}"
-                                                    style="color: wheat; text-decoration: none;">Sửa</a></button>
-                                            <button type="button" class="btn btn-success"><a
-                                                    style="color: wheat; text-decoration: none;"
-                                                    href="/del/product/${product.id}">Xóa</a></button>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
-
-                            </table>
-
-                            <nav aria-label="Page navigation example" style="margin-top: 17px;">
-                                <ul class="pagination justify-content-center">
-
-                                    <c:if test="${currentPages < 2}">
-                                        <li class="page-item disabled">
-                                            <a class="page-link" href="">Trước</a>
-                                        </li>
-                                    </c:if>
-                                    <c:if test="${currentPages > 1}">
-                                        <li class="page-item">
-                                            <a class="page-link" href="/adminProduct?page=${currentPagess-1}">Trước</a>
-                                        </li>
-                                    </c:if>
-
-
-                                    <c:if test="${totalPages > 0}">
-                                        <c:forEach begin="0" end="${totalPages-1}" varStatus="loop">
-
-                                            <li
-                                                class="${(loop.index+1) eq currentPages ? 'page-item active' : 'page-item'}">
-                                                <a class="page-link"
-                                                    href="/adminProduct?page=${loop.index+1}">${loop.index+1}</a>
+                                <nav aria-label="Page navigation">
+                                    <ul class="pagination justify-content-center">
+                                        <c:if test="${currentPages > 1}">
+                                            <li class="page-item">
+                                                <a class="page-link" href="/adminProduct?page=${currentPages-1}">Trước</a>
                                             </li>
-
+                                        </c:if>
+                                        
+                                        <c:forEach begin="1" end="${totalPages}" var="i">
+                                            <li class="page-item ${currentPages == i ? 'active' : ''}">
+                                                <a class="page-link" href="/adminProduct?page=${i}">${i}</a>
+                                            </li>
                                         </c:forEach>
-                                    </c:if>
-
-                                    <!-- <li class="page-item"><a class="page-link" href="/adminProduct?page=2">2</a></li>
-                                <li class="page-item"><a class="page-link" href="/adminProduct?page=3">3</a></li> -->
-
-                                    <c:if test="${currentPages == totalPages }">
-                                        <li class="page-item disabled">
-                                            <a class="page-link" href="/">Tiếp</a>
-                                        </li>
-                                    </c:if>
-
-                                    <c:if test="${currentPages < totalPages }">
-                                        <li class="page-item">
-                                            <a class="page-link" href="/adminProduct?page=${currentPage+1}">Tiếp</a>
-                                        </li>
-                                    </c:if>
-
-
-                                </ul>
-                            </nav>
-
-
-
-
+                                        
+                                        <c:if test="${currentPages < totalPages}">
+                                            <li class="page-item">
+                                                <a class="page-link" href="/adminProduct?page=${currentPages+1}">Sau</a>
+                                            </li>
+                                        </c:if>
+                                    </ul>
+                                </nav>
+                            </div>
                         </main>
                         <footer class="py-4 bg-light mt-auto">
                             <div class="container-fluid px-4">

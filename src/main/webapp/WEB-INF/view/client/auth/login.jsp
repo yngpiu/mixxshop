@@ -263,6 +263,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
               id="email"
               name="username"
               placeholder="name@example.com"
+              value="anhduc08768@gmail.com"
               required
             />
             <label for="email">Email</label>
@@ -276,6 +277,7 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
               name="password"
               placeholder="Mật khẩu"
               required
+              value="123123123"
             />
             <label for="password">Mật khẩu</label>
           </div>
