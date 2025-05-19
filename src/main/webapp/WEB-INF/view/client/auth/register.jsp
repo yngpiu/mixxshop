@@ -307,7 +307,11 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
     <div class="register-container">
       <div class="register-image">
         <div class="register-image-content">
-          <h2>Tham gia cùng Mixxshop</h2>
+          <h2>
+            <a href="/" style="color: white; text-decoration: none"
+              >Tham gia cùng Mixxshop</a
+            >
+          </h2>
           <p>
             Đăng ký tài khoản để trải nghiệm mua sắm tuyệt vời cùng chúng tôi
           </p>

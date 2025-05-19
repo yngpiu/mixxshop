@@ -147,7 +147,7 @@ contentType="text/html;charset=UTF-8" language="java" %>
   <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
       <!-- Navbar Brand-->
-      <a class="navbar-brand ps-3" href="index.html">Mixxshop</a>
+      <a class="navbar-brand ps-3" href="/">Mixxshop</a>
       <!-- Sidebar Toggle-->
       <button
         class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0"

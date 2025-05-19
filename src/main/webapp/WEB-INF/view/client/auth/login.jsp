@@ -224,7 +224,11 @@ contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
     <div class="login-container">
       <div class="login-image">
         <div class="login-image-content">
-          <h2>Chào mừng bạn đến với Mixxshop</h2>
+          <h2>
+            <a href="/" style="color: white; text-decoration: none"
+              >Chào mừng bạn đến với Mixxshop</a
+            >
+          </h2>
           <p>
             Nơi cung cấp những mẫu laptop chất lượng với giá tốt nhất thị
             trường. Đăng nhập để khám phá ngay!
